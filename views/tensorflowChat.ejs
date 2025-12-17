@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TensorFlow Chat</title>
+<link rel="stylesheet" href="/css/chat.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="chat-header">
+    <button class="back-button" onclick="goBack()">← Back</button>
+    <h1>Tensor Flow Chat</h1>
+</div>
+<div id="chat-container">
+    <!-- Chat messages -->
+    <div id="chat-window">
+        <div class="gemini-message message">How can I help you today?</div>
+    </div>
+    <!-- Loading indicator -->
+    <div class="loading-indicator" style="display:none;">Bot is thinking...</div>
+    <!-- Input form inside the same container -->
+    <form id="chat-form">
+        <input type="text" id="prompt-input" placeholder="e.g., books about space travel" autocomplete="off">
+        <button type="submit" id="send-button">Send</button>
+    </form>
+</div>
+<script>
+const form = document.getElementById('chat-form');
+const input = document.getElementById('prompt-input');
+const sendButton = document.getElementById('send-button');
+const chatWindow = document.getElementById('chat-window');
+const loadingIndicator = document.querySelector('.loading-indicator');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const prompt = input.value.trim();
+    if (!prompt) return;
+    addMessage(prompt, 'user-message');
+    input.value = '';
+    sendButton.disabled = true;
+    loadingIndicator.style.display = 'block';
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    try {
+        const res = await axios.post('/tensorflow-chat', { prompt });
+        addMessage(res.data.response, 'gemini-message');
+
+        if(res.data.books && res.data.books.length){
+            const bookList = res.data.books.map(b => `• ${b.title} by ${b.authors || 'N/A'}`).join('\n');
+            addMessage(bookList, 'gemini-message');
+        }
+    } catch (err) {
+        console.error(err);
+        addMessage('Sorry, something went wrong.', 'gemini-message');
+    } finally {
+        sendButton.disabled = false;
+        loadingIndicator.style.display = 'none';
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+});
+function addMessage(text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `${className} message`;
+    msgDiv.textContent = text;
+    chatWindow.appendChild(msgDiv);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+function goBack() {
+    history.back();
+}
+</script>
+</body>
+</html>

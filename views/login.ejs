@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
+    <title>Member Login</title>
+</head>
+<body>
+<div class="container">
+    <!-- Left Side (Image) -->
+    <div class="left">
+        <img src="/images/libraryimage.jpg" alt="Image 1">
+    </div>
+    <!-- Right Side (Popup Box) -->
+    <div class="right">
+        <h1>Member Login</h1>
+        <form action="/login" method="POST" class="form-table">
+        <table>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td><input type="text" name="username" required id="username" placeholder="Username" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" name="password" required id="password" placeholder="Password"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button>Login</button></td>
+                </tr>
+            </table>
+        </form>
+        <p><a href="/logout">Return To Home Page</a></p>
+    </div>
+</div>
+</body>
+</html>

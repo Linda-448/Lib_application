@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/bookstyle.css">
+    <title>List of Books</title>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="card">
+        <h1>List of Books</h1>
+        <table>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Avg. Rating</th>
+                <th>Publisher</th>
+                <th>Publication Date</th>
+            </tr>
+            <% books.forEach(function(book) { %>
+            <tr>
+                <td><%= book.bookID %></td>
+                <td><%= book.title %></td>
+                <td><%= book.authors %></td>
+                <td><%= book.average_rating %></td>
+                <td><%= book.publisher %></td>
+                <td><%= book.publication_date %></td>
+            </tr>
+            <% }); %>
+        </table>
+        <div class="button-row">
+            <a href="/tensorflow-chat" class="btn">Ask TensorFlow</a>
+        </div>
+        <div class="button-row logout-row">
+            <a href="/logout" class="btn logout-btn">Logout</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

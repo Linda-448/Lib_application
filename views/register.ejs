@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
+    <title>Sign up for Library Member</title>
+</head>
+<body>
+<div class="container">
+    <!-- Left image (same as home layout) -->
+    <div class="left">
+        <img src="/images/libraryimage.jpg" alt="Image 1">
+    </div>
+    <!-- Right popup area -->
+    <div class="right">
+        <h1>Sign up Form for Library Member</h1>
+        <form action="/register" method="POST" class="form-table">
+            <table>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td><input type="text" name="username" id="username" required placeholder="Username" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" name="password" id="password" required placeholder="Password"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button>Sign-UP</button></td>
+                </tr>
+            </table>
+        </form>
+        <p><a href="/logout">Return To Home Page</a></p>
+    </div>
+</div>
+</body>
+</html>
